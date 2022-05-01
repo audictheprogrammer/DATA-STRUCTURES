@@ -1,11 +1,11 @@
-#include "linked_list.h"
+#include "../Headers/linked_list.h"
 
 int main(){
     const int TEST1 = 1;
     const int TEST2 = 1;
 
     if (TEST1){
-        Node* list = createNode(1);
+        Element* list = createElement(1);
         insertFront(&list, 0);
         insertLast(&list, 2);
         print(list);
@@ -14,12 +14,12 @@ int main(){
     }
 
     if (TEST2){
-        Node* list = createNode(3);
+        Element* list = createElement(3);
         insertLast(&list, 4);
         insertLast(&list, 5);
         print(list);
-        Node* five = search(list, 5);
-        Node* six = search(list, 6);
+        Element* five = search(list, 5);
+        Element* six = search(list, 6);
         if (five)
             printf("5 found! \n");
         else
@@ -28,7 +28,7 @@ int main(){
             printf("6 found! \n");
         else
             printf("6 not found! \n");
-        removeNode(&list, five);
+        removeElement(&list, five);
         removeBack(&list);
         removeBack(&list);
         print(list);
