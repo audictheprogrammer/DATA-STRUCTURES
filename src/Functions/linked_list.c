@@ -17,7 +17,7 @@ void insertFront(Element** list, int data){
     if (elem == NULL){
         return ;
     }
-    // Element becomes the first
+    // elem becomes the first
     elem->next = *list;
     *list = elem;
 }
@@ -45,6 +45,7 @@ void print(Element* list){
 }
 
 Element* search(Element* list, int data){
+    /* Time complexity: O(n) */
     Element* current = list;
     while (current){
         if (current->data == data)
