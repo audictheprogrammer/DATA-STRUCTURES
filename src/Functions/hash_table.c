@@ -1,21 +1,63 @@
 #include "../Headers/hash_table.h"
 
-Element* createElement(int value){
+Element* createElement(char* value){
     Element* elem = (Element*) malloc(sizeof(Element));
     if (elem == NULL){
         printf("Malloc error \n");
         return NULL;
     }
-    elem->value = value;
+    elem->value = strdup(value);
     elem->key = -1;
     elem->next = NULL;
 }
 
+Element* search(hashTable* table, char* val){
+    /* Time complexity: O(n) */
+    int key = hash(val, table->size);
+    Element* current = table->tab[key];
+    while (current){
+        if (strcmp(current->value, val) == 0)
+            return current;
+        current = current->next;
+    }
+    return NULL;
+}
+
+void removeElement(hashTable* table, Element* elem){
+    /* Time complexity: O(n) */
+    Element* list = table->tab[elem->key];
+    if (elem == list){
+        list = list->next;
+        printf("/%s/ removed \n", elem->value);
+        free(elem->value);
+        free(elem);
+        return ;
+    }
+    Element* current = list;
+    while (current->next){
+        if (current->next == elem){
+            Element* copy = elem->next;
+            if (elem->next == NULL){
+            }
+            printf("/%s/ removed \n", elem->value);
+            free(elem->value);
+            free(elem);
+            current->next = copy;
+            return ;
+        }
+        current = current->next;
+    }
+    printf("Element is not in the list \n");
+}
+
 void removeFront(Element** list){
+    /* Time complexity: O(1) */
     if (*list == NULL){
-        printf("list is empty \n");
+        printf("list is empty, cannot remove element \n");
+        return ;
     }
     Element* copy = (*list)->next;
+    free((*list)->value);
     free(*list);
     *list = copy;
 }
@@ -40,12 +82,16 @@ hashTable* createHashTable(int size){
     return table;
 }
 
-int hash(int value, int size){
+int hash(char* value, int size){
     /* arbitrary choice. Time complexity: O(1) */
-    return value % size;
+    int sum = 0;
+    for (int i = 0; i < strlen(value); i++){
+        sum += value[i] * (i+1);
+    }
+    return sum % size;
 }
 
-void insertElem(hashTable* table, int value){
+void insertElem(hashTable* table, char* value){
     /* Consider table is composed of linked-list, so always
     insert front. Time complexity: O(1) */
     // initialize elem
@@ -53,7 +99,6 @@ void insertElem(hashTable* table, int value){
     if (elem == NULL){
         return ;
     }
-    elem->value = value;
     elem->key = hash(value, table->size);
     // elem becomes the first
     elem->next = table->tab[elem->key];
@@ -71,7 +116,7 @@ void printTable(hashTable* table){
         Element* current = table->tab[i];
         printf("%d: ", i);
         while (current){
-            printf("/%d/ ", current->value);
+            printf("/%s/ ", current->value);
             current = current->next;
         }
         printf("\n");
