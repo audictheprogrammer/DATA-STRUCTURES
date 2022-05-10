@@ -29,4 +29,4 @@ binary_heap: ./$(TEST_DIR)/binary_heap_test.c binary_heap.o
 
 
 clean:
-	rm -f *.o linked_list hash_table binary_searching_tree
+	rm -f *.o linked_list hash_table binary_searching_tree binary_heap
