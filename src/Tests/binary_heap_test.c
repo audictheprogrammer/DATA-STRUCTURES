@@ -3,6 +3,8 @@
 int main(){
     const int TEST1 = 1;
     const int TEST2 = 1;
+    const int TEST3 = 1;
+    const int TEST4 = 1;
 
     if (TEST1){
         // Testing printHeap and insertNode
@@ -34,6 +36,33 @@ int main(){
         printf("The max value is: %d \n", getMaxValue(heap));
     }
 
+    if (TEST3){
+        // Testing removeRoot
+        Heap* heap = createHeap(4);
+        insertNode(heap, 1);
+        insertNode(heap, 2);
+        insertNode(heap, 3);
+        insertNode(heap, 4);
+        printHeap(heap);
+        printf("Remove the root \n");
+        removeRoot(heap);
+        printHeap(heap);
+    }
+
+    if (TEST4){
+        // Testing getMinValue
+        Heap* heap = createHeap(7);
+        insertNode(heap, 1);
+        insertNode(heap, 2);
+        insertNode(heap, 3);
+        insertNode(heap, 4);
+        insertNode(heap, 5);
+        insertNode(heap, 6);
+        insertNode(heap, 7);
+        printHeap(heap);
+        int minValue = getMinValue(heap);
+        printf("Min value is: %d \n", minValue);
+    }
 
     return 0;
 }

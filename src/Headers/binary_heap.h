@@ -13,7 +13,10 @@ typedef struct heap{
 Heap* createHeap(int size);
 void printHeap(Heap* heap);
 int getParentPosition(int i);
+void swap(int* a, int* b);
 void insertNode(Heap* heap, int value);
 int getMaxValue(Heap* heap);
+int getMinValue(Heap* heap);
+void removeRoot(Heap* heap);
 
 #endif
