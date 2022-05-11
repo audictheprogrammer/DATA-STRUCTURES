@@ -17,6 +17,8 @@ void swap(int* a, int* b);
 void insertNode(Heap* heap, int value);
 int getMaxValue(Heap* heap);
 int getMinValue(Heap* heap);
+int searchValue(Heap* heap, int value);
+void removeNode(Heap* heap, int value);
 void removeRoot(Heap* heap);
 
 #endif

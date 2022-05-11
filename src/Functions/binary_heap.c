@@ -21,15 +21,15 @@ void printHeap(Heap* heap){
     if (heap == NULL){
         printf("Heap is empty, cannot print \n");
     }
-
     int* array = heap->array;
     for (int i = 0; i < heap->nb; i++){
         printf("[%d] ", array[i]);
         if (log2(i+2) == (double) (int) log2(i+2)){
             printf("\n");
+        } else if (i == heap->nb - 1){
+            printf("\n");
         }
     }
-    printf("\n");
 }
 
 int getParentPosition(int i){
@@ -41,6 +41,7 @@ int getParentPosition(int i){
 }
 
 void swap(int* a, int* b){
+    /* Time complexity: O(1) */
     *a = *a + *b;
     *b = *a - *b;
     *a = *a - *b;
@@ -78,7 +79,7 @@ int getMaxValue(Heap* heap){
 
 int getMinValue(Heap* heap){
     /* Time complexity: O(n) */
-    // Get the index where the last level of the heap starts
+    // Get the index where last level of the heap starts
     int tmp = (int) log2(heap->nb);
     int index = (int) pow(2, tmp) - 1;
     // Start comparing
@@ -90,24 +91,48 @@ int getMinValue(Heap* heap){
     return mn;
 }
 
-void removeRoot(Heap* heap){
-    /* Time complexity: O(log n) */
+int searchValue(Heap* heap, int value){
+    /* Time complexity: O(n) */
+    int nb;
+    if (heap == NULL)
+        nb == 0;
+    else
+        nb = heap->nb;
+    for (int i = 0; i < nb; i++){
+        if (heap->array[i] == value)
+            return i;
+    }
+    return -1;
+}
+
+void removeNode(Heap* heap, int value){
+    /* Time complexity: O(n) */
     if (heap == NULL || heap->nb == 0)
         return ;
+    int valuePos = searchValue(heap, value);
+    if (valuePos == -1){
+        return ;
+    }
     int* array = heap->array;
-    // Swap root and lastNode to keep the structure properties
-    swap(&array[0], &array[heap->nb]);
+    // Swap valueNode and lastNode to keep the structure properties
+    swap(&array[valuePos], &array[heap->nb-1]);
     // Remove the node
-    array[heap->nb] = 0;
+    array[heap->nb-1] = 0;
     heap->nb--;
     // Swap between parent and child until tree becomes a heap
     int childPos = getParentPosition(heap->nb);
     int parentPos = getParentPosition(childPos);
-    while(parentPos >= 0){
+    while(parentPos >= valuePos){
         swap(&array[childPos], &array[parentPos]);
         childPos = parentPos;
         parentPos = getParentPosition(parentPos);
     }
+}
 
-
+void removeRoot(Heap* heap){
+    /* Time complexity: O(log n) */
+    if (heap == NULL || heap->nb == 0){
+        return ;
+    }
+    removeNode(heap, heap->array[0]);
 }

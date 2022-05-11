@@ -22,20 +22,19 @@ int main(){
         printHeap(heap);
         printf("Printed heap \n");
     }
-
     if (TEST2){
-        // Testing insertNode and getMaxValue
+        // Testing insertNode, getMaxValue and getMinValue
         Heap* heap = createHeap(4);
         printf("Inserts the following sequence: [1, 2, 3, 4] \n");
         insertNode(heap, 1);
         insertNode(heap, 2);
         insertNode(heap, 3);
         insertNode(heap, 4);
-        printf("Current number of nodes is: %d \n", heap->nb);
         printHeap(heap);
+        printf("Current number of nodes is: %d \n", heap->nb);
         printf("The max value is: %d \n", getMaxValue(heap));
+        printf("The min value is: %d \n", getMinValue(heap));
     }
-
     if (TEST3){
         // Testing removeRoot
         Heap* heap = createHeap(4);
@@ -44,13 +43,13 @@ int main(){
         insertNode(heap, 3);
         insertNode(heap, 4);
         printHeap(heap);
-        printf("Remove the root \n");
+        printf("Removing the root \n");
         removeRoot(heap);
         printHeap(heap);
+        printf("Removed the root \n");
     }
-
     if (TEST4){
-        // Testing getMinValue
+        // Testing removeRoot
         Heap* heap = createHeap(7);
         insertNode(heap, 1);
         insertNode(heap, 2);
@@ -60,9 +59,10 @@ int main(){
         insertNode(heap, 6);
         insertNode(heap, 7);
         printHeap(heap);
-        int minValue = getMinValue(heap);
-        printf("Min value is: %d \n", minValue);
+        printf("Removing the node 6 \n");
+        removeNode(heap, 6);
+        printHeap(heap);
+        printf("Removed the node 6 \n");
     }
-
     return 0;
 }
