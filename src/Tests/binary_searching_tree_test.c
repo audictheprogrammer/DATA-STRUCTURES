@@ -1,12 +1,13 @@
 #include "../Headers/binary_searching_tree.h"
 
 int main(){
-    const int TEST1 = 1;
-    const int TEST2 = 1;
-    const int TEST3 = 1;
-    const int TEST4 = 1;
-    const int TEST5 = 1;
-    const int TEST6 = 1;
+    const int TEST1 = 0;
+    const int TEST2 = 0;
+    const int TEST3 = 0;
+    const int TEST4 = 0;
+    const int TEST5 = 0;
+    const int TEST6 = 0;
+    const int TEST7 = 1;
 
     if (TEST1){
         // Testing insert, print and deleteTree
@@ -150,6 +151,23 @@ int main(){
 
     }
 
+    if (TEST7){
+        // Testing remove
+        BST tree = NULL;
+        insertNodeV2(&tree, 0);
+        insertNodeV2(&tree, 1);
+        insertNodeV2(&tree, -1);
+        insertNodeV2(&tree, 2);
+        insertNodeV2(&tree, -2);
+        insertNodeV2(&tree, 3);
+        insertNodeV2(&tree, -3);
+
+        printf("\nPriting the tree \n");
+        prefixPrint(tree);
+
+        deleteTree(&tree);
+
+    }
 
     return 0;
 }
