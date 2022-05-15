@@ -152,7 +152,6 @@ int main(){
     }
 
     if (TEST7){
-        // Testing remove
         BST tree = NULL;
         insertNodeV2(&tree, 0);
         insertNodeV2(&tree, 1);
