@@ -152,6 +152,7 @@ int main(){
     }
 
     if (TEST7){
+        // Pushing insertNodeV2 to the limit
         BST tree = NULL;
         insertNodeV2(&tree, 0);
         insertNodeV2(&tree, 1);
@@ -163,6 +164,7 @@ int main(){
 
         printf("\nPriting the tree \n");
         prefixPrint(tree);
+        // It's not an AVL
 
         deleteTree(&tree);
 
